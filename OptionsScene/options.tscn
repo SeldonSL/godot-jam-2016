@@ -1,0 +1,94 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://OptionsScene/options.gd" type="Script" id=1]
+[ext_resource path="res://OptionsScene/font.fnt" type="Font" id=2]
+[ext_resource path="res://OptionsScene/button2.png" type="Texture" id=3]
+
+[node name="Options" type="Node"]
+
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
+
+[node name="Title" type="Label" parent="."]
+
+margin/left = 202.0
+margin/top = 57.0
+margin/right = 416.0
+margin/bottom = 93.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 2 )
+text = "Options"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="TextureButton" type="TextureButton" parent="."]
+
+margin/left = 183.0
+margin/top = 672.0
+margin/right = 430.0
+margin/bottom = 721.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+textures/normal = ExtResource( 3 )
+params/scale = Vector2( 5, 1 )
+
+[node name="Label" type="Label" parent="TextureButton"]
+
+margin/left = 57.0
+margin/top = 7.0
+margin/right = 193.0
+margin/bottom = 43.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="MusicButton" type="CheckButton" parent="."]
+
+margin/left = 165.0
+margin/top = 196.0
+margin/right = 300.0
+margin/bottom = 217.0
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = true
+text = "Music"
+flat = false
+align = 0
+
+[node name="SoundFXButton" type="CheckButton" parent="."]
+
+margin/left = 165.0
+margin/top = 288.0
+margin/right = 276.0
+margin/bottom = 309.0
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = true
+text = "Sound FX"
+flat = false
+align = 0
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+
+[connection signal="toggled" from="MusicButton" to="." method="_on_MusicButton_toggled"]
+
+[connection signal="toggled" from="SoundFXButton" to="." method="_on_SoundFXButton_toggled"]
+
+

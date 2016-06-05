@@ -1,0 +1,267 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://MainMenuScene/main_menu.gd" type="Script" id=1]
+[ext_resource path="res://MainMenuScene/button1.png" type="Texture" id=2]
+[ext_resource path="res://MainMenuScene/font.fnt" type="Font" id=3]
+[ext_resource path="res://MainMenuScene/button2.png" type="Texture" id=4]
+[ext_resource path="res://MainMenuScene/button3.png" type="Texture" id=5]
+[ext_resource path="res://MainMenuScene/button4.png" type="Texture" id=6]
+
+[sub_resource type="Theme" id=1]
+
+
+[sub_resource type="Theme" id=2]
+
+
+[node name="Node" type="Node"]
+
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
+
+[node name="PlayButton" type="TextureButton" parent="."]
+
+margin/left = 160.0
+margin/top = 150.0
+margin/right = 454.0
+margin/bottom = 199.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+textures/normal = ExtResource( 2 )
+params/scale = Vector2( 6, 1 )
+
+[node name="Label" type="Label" parent="PlayButton"]
+
+margin/left = 76.0
+margin/top = 6.0
+margin/right = 228.0
+margin/bottom = 42.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+text = "PLAY!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="OptionsButton" type="TextureButton" parent="."]
+
+margin/left = 160.0
+margin/top = 280.0
+margin/right = 454.0
+margin/bottom = 329.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+textures/normal = ExtResource( 4 )
+params/scale = Vector2( 6, 1 )
+
+[node name="Label1" type="Label" parent="OptionsButton"]
+
+margin/left = 48.0
+margin/top = 6.0
+margin/right = 262.0
+margin/bottom = 42.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+text = "Options"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CreditsButton" type="TextureButton" parent="."]
+
+margin/left = 160.0
+margin/top = 420.0
+margin/right = 454.0
+margin/bottom = 469.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+textures/normal = ExtResource( 5 )
+params/scale = Vector2( 6, 1 )
+
+[node name="Label2" type="Label" parent="CreditsButton"]
+
+margin/left = 42.0
+margin/top = 7.0
+margin/right = 256.0
+margin/bottom = 43.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+text = "Credits"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="ExitButton" type="TextureButton" parent="."]
+
+margin/left = 160.0
+margin/top = 550.0
+margin/right = 454.0
+margin/bottom = 599.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+textures/normal = ExtResource( 6 )
+params/scale = Vector2( 6, 1 )
+
+[node name="Label3" type="Label" parent="ExitButton"]
+
+margin/left = 94.0
+margin/top = 5.0
+margin/right = 308.0
+margin/bottom = 41.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+text = "Exit"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label" type="Label" parent="."]
+
+margin/left = 164.0
+margin/top = 35.0
+margin/right = 458.0
+margin/bottom = 94.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+text = "Main Menu"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="ExitPopup" type="Popup" parent="."]
+
+process/pause_mode = 2
+visibility/visible = false
+margin/left = 154.0
+margin/top = 278.0
+margin/right = 454.0
+margin/bottom = 478.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = SubResource( 1 )
+popup/exclusive = true
+__meta__ = { "_editor_collapsed":true }
+
+[node name="Panel" type="Panel" parent="ExitPopup"]
+
+margin/right = 300.0
+margin/bottom = 200.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+theme/theme = SubResource( 2 )
+
+[node name="OKButton" type="TextureButton" parent="ExitPopup/Panel"]
+
+margin/left = 28.0
+margin/top = 130.0
+margin/right = 78.0
+margin/bottom = 179.0
+rect/scale = Vector2( 2, 1 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+toggle_mode = false
+textures/normal = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="ExitPopup/Panel/OKButton"]
+
+margin/left = 5.0
+margin/top = 9.0
+margin/right = 107.0
+margin/bottom = 45.0
+rect/scale = Vector2( 0.4, 0.8 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+text = "Yes"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CancelButton1" type="TextureButton" parent="ExitPopup/Panel"]
+
+margin/left = 171.0
+margin/top = 130.0
+margin/right = 221.0
+margin/bottom = 179.0
+rect/scale = Vector2( 2, 1 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+toggle_mode = false
+textures/normal = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="ExitPopup/Panel/CancelButton1"]
+
+margin/left = 16.0
+margin/top = 9.0
+margin/right = 86.0
+margin/bottom = 45.0
+rect/scale = Vector2( 0.4, 0.8 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+text = "No"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label" type="Label" parent="ExitPopup/Panel"]
+
+margin/left = 10.0
+margin/top = 9.0
+margin/right = 289.0
+margin/bottom = 126.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+text = "Do you want to Quit\?"
+align = 1
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+
+[connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
+
+[connection signal="pressed" from="CreditsButton" to="." method="_on_CreditsButton_pressed"]
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
+
+[connection signal="pressed" from="ExitPopup/Panel/OKButton" to="." method="_on_OKButton_pressed"]
+
+[connection signal="pressed" from="ExitPopup/Panel/CancelButton1" to="." method="_on_CancelButton1_pressed"]
+
+

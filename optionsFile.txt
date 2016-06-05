@@ -1,0 +1,4 @@
+[General]
+
+Music=false
+SoundFx=false
