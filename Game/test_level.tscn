@@ -10,6 +10,29 @@
 transform/pos = Vector2( 188, 137 )
 collision/margin = 0.08
 
+[node name="Camera2D" type="Camera2D" parent="Human Player"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
 [node name="Maze" parent="." instance=ExtResource( 2 )]
+
+xwide = 50
+yhigh = 50
+n_rooms = 10
 
 

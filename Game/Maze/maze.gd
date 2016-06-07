@@ -1,5 +1,5 @@
 #Based on python code by d.factorial [at] gmail.com
-
+tool
 extends Node
 
 #the dimensions of the maze
@@ -38,10 +38,12 @@ const E = 2.71828182846
 
 
 func _ready():
-	randomize()
+	#randomize()
+	seed(13)
 	init()	
 	make_maze()
-	print_maze(field)
+	#print_maze(field)
+	update_tilemap(field)
 
 func shuffleArray(a):
 	for i in range (0,a.size()-2):
@@ -247,4 +249,14 @@ func print_maze(maze, data = false):
 			line_str += "_"
 		print (line_str)
 		line_str=""
+
+func update_tilemap(maze):
+	var tilemap = get_node("TileMap")
+	for i in range (0,xwide):
+		for j in range(0,yhigh):
+			if field[i][j] == 0:
+				tilemap.set_cell(i,j,0)
+			else:
+				tilemap.set_cell(i,j,-1)
+	
 

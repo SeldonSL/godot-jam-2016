@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://Game/Maze/maze.gd" type="Script" id=1]
+[ext_resource path="res://Game/Maze/tileset.res" type="TileSet" id=2]
 
 [node name="Maze" type="Node"]
 
@@ -9,5 +10,24 @@ xwide = 10
 yhigh = 10
 n_rooms = 5
 branchrate = 0
+
+[node name="TileMap" type="TileMap" parent="."]
+
+transform/scale = Vector2( 3, 3 )
+mode = 0
+tile_set = ExtResource( 2 )
+cell/size = Vector2( 64, 64 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray(  )
 
 

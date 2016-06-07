@@ -15,10 +15,10 @@ func _ready():
 func _fixed_process(delta):
 	
 	var pos = self.get_pos()	
-	if (pos.x > (viewport_size.x - 32) or pos.x < 32):
-		self.queue_free()
-	if (pos.y > (viewport_size.y - 32) or pos.y < 32):
-		self.queue_free()		
+	#if (pos.x > (viewport_size.x - 32) or pos.x < 32):
+	#	self.queue_free()
+	#if (pos.y > (viewport_size.y - 32) or pos.y < 32):
+	#	self.queue_free()		
 
 	pos += Vector2(cos(angle) * Speed * delta, sin(angle) * Speed * delta)	
 	self.set_pos(pos)

@@ -80,8 +80,9 @@ func _process(delta):
 	
 func _input(ev):
 		# Mouse rotation
+		
 	if (ev.type==InputEvent.MOUSE_MOTION):
-		mousePos = ev.pos
+		mousePos =  get_global_mouse_pos()
 		
 
 func add_life(lifeValue):
