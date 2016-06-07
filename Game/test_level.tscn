@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://Game/Player/player_1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Maze/maze_generator.tscn" type="PackedScene" id=2]
 
 [node name="TestLevel" type="Node"]
 
@@ -8,5 +9,7 @@
 
 transform/pos = Vector2( 188, 137 )
 collision/margin = 0.08
+
+[node name="Maze" parent="." instance=ExtResource( 2 )]
 
 

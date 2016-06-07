@@ -50,10 +50,10 @@ func _process(delta):
 		isShooting = true
 		if get_node("Sprite").get_frame() == 0:
 			get_node("Sprite").set_frame(1)
-		print (self)
-		print (get_child(0).get_name())
-		print (get_child(1).get_name())
-		print (get_child(2).get_name())
+		#print (self)
+		#print (get_child(0).get_name())
+		#print (get_child(1).get_name())
+		#print (get_child(2).get_name())
 		get_node("Weapon").fire_weapon(shootAngle)
 		
 	else:
