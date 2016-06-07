@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://Game/Player/player_1.gd" type="Script" id=1]
+[ext_resource path="res://Game/Player/nave.png" type="Texture" id=2]
+[ext_resource path="res://Game/Weapons/weapon_1.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+frames = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
+
+[node name="Human Player" type="KinematicBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1.5, 0, 0, 1.4, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
+Speed = 300
+Life = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/scale = Vector2( 1.5, 1.4 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+
+transform/rot = 270.0
+transform/scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 2 )
+
+[node name="Weapon" parent="." instance=ExtResource( 3 )]
+
+

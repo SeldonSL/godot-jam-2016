@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Game/Player/damageIndicator.gd" type="Script" id=1]
+[ext_resource path="res://Game/fontKenney.fnt" type="Font" id=2]
+
+
+
+
+[node name="DamageIndicator" type="Node"]
+
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
+
+[node name="Label" type="Label" parent="."]
+
+margin/left = -2.0
+margin/top = -4.0
+margin/right = 62.0
+margin/bottom = 20.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.988281, 0.0193024, 0.0193024, 1 )
+text = "1"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.6
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+

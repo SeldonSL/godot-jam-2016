@@ -1,17 +1,17 @@
 [gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://SplashScene/splashScreen.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://SplashScene/icon.png" type="Texture" id=2]
 
 [node name="splashScreen" type="Node2D"]
 
-transform/pos = Vector2( 300, 400 )
+transform/pos = Vector2( 640, 360 )
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"Script" }
 fadeSpeed = 0.7
 initTime = 1
 showingTime = 2
-logo_scale = Vector2( 2, 2 )
+logo_scale = Vector2( 0.25, 0.25 )
 
 [node name="myLogo" type="Sprite" parent="."]
 

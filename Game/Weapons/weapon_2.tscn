@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://Game/Weapons/weapon_2.gd" type="Script" id=1]
+
+
+[node name="Weapon" type="Node"]
+
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.15
+one_shot = true
+autostart = false
+
+[node name="UpgradeTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="ActiveTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="ActiveTimer" to="." method="_on_ActiveTimer_timeout"]
+
+
