@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://Game/Maze/tile.png" type="Texture" id=1]
+[ext_resource path="res://Game/Maze/tile1.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 32, 32 )
+
+[sub_resource type="NavigationPolygon" id=2]
+
+vertices = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+polygons = [ IntArray( 0, 1, 2, 3 ) ]
+outlines = [ Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 ) ]
 
 [node name="Node" type="Node"]
 
@@ -31,5 +38,15 @@ bounce = 0.0
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="Floor" type="Sprite" parent="."]
+
+visibility/opacity = 0.0
+texture = ExtResource( 2 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Floor"]
+
+navpoly = SubResource( 2 )
+enabled = true
 
 

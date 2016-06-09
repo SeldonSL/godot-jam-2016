@@ -20,6 +20,7 @@ var walk_animation_timer = 1
 # Keyboard Movement actions
 var move_actions = { "K_MOVE_LEFT":Vector2(-1,0), "K_MOVE_RIGHT":Vector2(1,0), "K_MOVE_UP":Vector2(0,-1), "K_MOVE_DOWN":Vector2(0,1) }
 
+var path = []
 
 func _ready():
 	set_process(true)
@@ -50,33 +51,12 @@ func _process(delta):
 		isShooting = true
 		if get_node("Sprite").get_frame() == 0:
 			get_node("Sprite").set_frame(1)
-		#print (self)
-		#print (get_child(0).get_name())
-		#print (get_child(1).get_name())
-		#print (get_child(2).get_name())
+
 		get_node("Weapon").fire_weapon(shootAngle)
 		
 	else:
 		isShooting = false
 	
-	# animation
-	if dir != Vector2(0,0):
-		walk_animation_timer += walk_animation_delta * delta	
-	
-	if walk_animation_timer > 0.2:
-		if isShooting and get_node("Sprite").get_frame() == 1:
-			get_node("Sprite").set_frame(2)
-		elif isShooting and get_node("Sprite").get_frame() == 2:
-			get_node("Sprite").set_frame(1)
-		elif isShooting and get_node("Sprite").get_frame() == 0:
-			get_node("Sprite").set_frame(1)
-		elif not isShooting and get_node("Sprite").get_frame() == 0:
-			get_node("Sprite").set_frame(1)
-		elif not isShooting and get_node("Sprite").get_frame() == 1:
-			get_node("Sprite").set_frame(0)	
-		elif not isShooting and get_node("Sprite").get_frame() == 2:
-			get_node("Sprite").set_frame(1)
-		walk_animation_timer = 0
 	
 func _input(ev):
 		# Mouse rotation
@@ -86,28 +66,8 @@ func _input(ev):
 		
 
 func add_life(lifeValue):
-	#case is health
-	if lifeValue > 0:
-		currentLife += lifeValue
-	
-		
-	# case is damage
-	if lifeValue < 0:
-		currentLife += lifeValue
-		acumDamage += lifeValue
-		get_tree().get_root().get_node("/root/TestLevel/GUI_P1/ProgressBar").set_value(currentLife)
-	
-		# Spawn Damage Indicator
-		if acumDamage > 5:
-			var d_i = damageInd.instance()
-			d_i.get_node("Label").set_text("5")
-			d_i.get_node("Label").set_scale(Vector2(0.6,0.6))
-			d_i.get_node("Label").set_pos(get_pos())
-			add_child(d_i)
-			acumDamage = 0
-		
-	
-	#Check for dead
+	pass
 	
 func get_player_number():
 	return playerNumber
+	

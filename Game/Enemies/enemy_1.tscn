@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://Game/Enemies/enemy_1.gd" type="Script" id=1]
+[ext_resource path="res://Game/Enemies/nave.png" type="Texture" id=2]
+[ext_resource path="res://Game/Weapons/weapon_1.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 256, 256 )
+
+[node name="Enemy" type="Area2D"]
+
+transform/scale = Vector2( 0.15, 0.15 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+speed = 500
+Life = 1
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/rot = -90.0
+texture = ExtResource( 2 )
+modulate = Color( 0.988281, 0.0154419, 0.0154419, 1 )
+
+[node name="Shoot_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="Weapon" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+
+[editable path="Weapon"]

@@ -68,6 +68,8 @@ params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
 
+[connection signal="body_enter" from="." to="." method="_on_Bullet_body_enter"]
+
 [connection signal="area_enter" from="." to="." method="_on_Bullet_area_enter"]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -1,6 +1,6 @@
 #Based on python code by d.factorial [at] gmail.com
 tool
-extends Node
+extends Node2D
 
 #the dimensions of the maze
 export var xwide = 100
@@ -17,7 +17,7 @@ export var n_rooms = 5
 export var branchrate = 0
 
 
-
+var path =[]
 
 #the grid of the maze
 #each cell of the maze is one of the following:
@@ -39,6 +39,7 @@ const E = 2.71828182846
 
 func _ready():
 	#randomize()
+	
 	seed(13)
 	init()	
 	make_maze()
@@ -251,12 +252,28 @@ func print_maze(maze, data = false):
 		line_str=""
 
 func update_tilemap(maze):
-	var tilemap = get_node("TileMap")
+	var tilemap = get_node("Navigation2D/TileMap")
+	for i in range (-1,xwide+1):
+		tilemap.set_cell(i,-1,0)
+	for i in range (-1,xwide+1):
+		tilemap.set_cell(i,yhigh,0)
+	for j in range (-1,yhigh+1):
+		tilemap.set_cell(-1,j,0)
+	for j in range (-1,yhigh+1):
+		tilemap.set_cell(xwide,j,0)
 	for i in range (0,xwide):
 		for j in range(0,yhigh):
 			if field[i][j] == 0:
 				tilemap.set_cell(i,j,0)
 			else:
-				tilemap.set_cell(i,j,-1)
+				tilemap.set_cell(i,j,1)
+	
+func generate_path(from, to):
+	var path = Array( get_node("Navigation2D").get_simple_path( from, to, false ))
+	return path
 	
 
+
+#func _draw():
+#	for i in range(path.size()-1):
+#		draw_line( path[i], path[i+1], Color(1,0,0,1), 2 )
