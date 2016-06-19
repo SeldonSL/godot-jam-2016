@@ -2,20 +2,13 @@
 extends KinematicBody2D
 
 # Actions
-export var Speed = 3 # player speed
-export var Life = 100 # player life
+export var speed = 3 # player speed
+export var life = 100 # player life
 var isShooting = false
 var shootAngle = 0
 var last_angle = 0
 var mousePos = Vector2(0,0)
-var currentLife = Life
-var playerNumber = 1
-var acumDamage = 0
-var damageInd = preload("res://Game/Player/damageIndicator.tscn")
-
-# walk animation
-var walk_animation_delta = 1
-var walk_animation_timer = 1
+var currentLife = life
 
 # Keyboard Movement actions
 var move_actions = { "K_MOVE_LEFT":Vector2(-1,0), "K_MOVE_RIGHT":Vector2(1,0), "K_MOVE_UP":Vector2(0,-1), "K_MOVE_DOWN":Vector2(0,1) }
@@ -27,7 +20,7 @@ func _ready():
 	set_process_input(true)
 	
 
-func _process(delta):
+func _process(delta):	
 	
 	# Movement
 	var dir = Vector2(0,0)
@@ -36,7 +29,7 @@ func _process(delta):
 		if Input.is_action_pressed(ac):
 			dir += move_actions[ac]
 			
-	move(dir.normalized() * Speed * delta)
+	move(dir.normalized() * speed * delta)
 	if dir == Vector2(0,0):
 		set_rot(last_angle)
 	else:
@@ -46,9 +39,12 @@ func _process(delta):
 	# Shooting
 	if Input.is_action_pressed("M_SHOOT"):
 		look_at(mousePos)
+		
 		shootAngle = get_pos().angle_to_point(mousePos)
+		last_angle = shootAngle + 3.14159
 		shootAngle = - (shootAngle - 3.14159/2) + 3.141519
 		isShooting = true
+		
 		if get_node("Sprite").get_frame() == 0:
 			get_node("Sprite").set_frame(1)
 
@@ -59,15 +55,20 @@ func _process(delta):
 	
 	
 func _input(ev):
-		# Mouse rotation
-		
+		# Mouse rotation		
 	if (ev.type==InputEvent.MOUSE_MOTION):
 		mousePos =  get_global_mouse_pos()
+	
+	if (ev.type==InputEvent.MOUSE_BUTTON):
+		if ev.is_action_pressed("M_SEC_SHOOT"):			
+			OS.set_time_scale(0.5)#slow down the game 2 times
+	
 		
 
 func add_life(lifeValue):
-	pass
-	
-func get_player_number():
-	return playerNumber
-	
+	print (currentLife)
+	currentLife += lifeValue
+	if currentLife <= 0:
+		print ("I am dead!, GAME OVER")
+		#queue_free()
+		

@@ -1,49 +1,77 @@
 [gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://Game/Enemies/enemy_1.gd" type="Script" id=1]
-[ext_resource path="res://Game/Enemies/nave.png" type="Texture" id=2]
-[ext_resource path="res://Game/Weapons/weapon_1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Enemies/explosion_particle.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 256, 256 )
+extents = Vector2( 60, 60 )
+
+[sub_resource type="ColorRamp" id=2]
+
+offsets = FloatArray( 0, 1 )
+colors = ColorArray( 0.870588, 0.807843, 0.611765, 1, 0.635294, 0.0705882, 0.196078, 1 )
 
 [node name="Enemy" type="Area2D"]
 
-transform/scale = Vector2( 0.15, 0.15 )
+transform/scale = Vector2( 0.5, 0.5 )
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
+shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision/layers = 2
 script/script = ExtResource( 1 )
-speed = 500
-Life = 1
-
-[node name="Sprite" type="Sprite" parent="."]
-
-transform/rot = -90.0
-texture = ExtResource( 2 )
-modulate = Color( 0.988281, 0.0154419, 0.0154419, 1 )
-
-[node name="Shoot_timer" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[node name="Weapon" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 shape = SubResource( 1 )
-trigger = false
+trigger = true
 _update_shape_index = 0
 
+[node name="Particles2D" type="Particles2D" parent="."]
 
-[editable path="Weapon"]
+config/amount = 16
+config/lifetime = 1.0
+config/preprocess = 0.2
+config/emitting = false
+config/local_space = false
+config/explosiveness = 0.2
+config/texture = ExtResource( 2 )
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 100.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 2.0
+params/final_size = 3.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color = Color( 0.635294, 0.0705882, 0.196078, 1 )
+color/color_ramp = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[connection signal="body_enter" from="." to="." method="_on_Enemy_body_enter"]
+
+[connection signal="area_enter" from="." to="." method="_on_Enemy_area_enter"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+

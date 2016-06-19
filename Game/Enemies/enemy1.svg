@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r"
+   inkscape:export-filename="/home/seldon/Dropbox/BlackQuiltro/Games/GodotJam/Game/Enemies/nave.png"
+   inkscape:export-xdpi="27.885824"
+   inkscape:export-ydpi="27.885824"
+   sodipodi:docname="enemy1.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4155">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop4157" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0.33333334"
+         offset="1"
+         id="stop4159" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4155"
+       id="radialGradient4161"
+       cx="537.14282"
+       cy="255.21935"
+       fx="537.14282"
+       fy="255.21935"
+       r="128.57143"
+       gradientTransform="matrix(1.9838871,-0.03275765,0.03138872,1.9009801,-769.52302,1.1876161)"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4163"
+       x="-0.23628"
+       width="1.47256"
+       y="-0.23893483"
+       height="1.4778697">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="50.767332"
+         id="feGaussianBlur4165" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-625.44404"
+     inkscape:cy="520"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1023"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:url(#radialGradient4161);fill-opacity:1;stroke:none;stroke-width:100;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4163)"
+       id="path4136-0"
+       cx="304.11877"
+       cy="468.75906"
+       rx="257.83307"
+       ry="254.96826"
+       inkscape:export-xdpi="27.885824"
+       inkscape:export-ydpi="27.885824" />
+    <ellipse
+       style="fill:#a21232;fill-opacity:1;stroke:#1a1831;stroke-width:100;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path4136"
+       cx="306.28571"
+       cy="465.21936"
+       rx="128.57143"
+       ry="127.14286"
+       inkscape:export-xdpi="27.885824"
+       inkscape:export-ydpi="27.885824" />
+  </g>
+</svg>

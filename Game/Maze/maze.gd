@@ -36,7 +36,6 @@ var frontier = []
 
 const E = 2.71828182846
 
-
 func _ready():
 	#randomize()
 	
@@ -45,6 +44,7 @@ func _ready():
 	make_maze()
 	#print_maze(field)
 	update_tilemap(field)
+
 
 func shuffleArray(a):
 	for i in range (0,a.size()-2):
@@ -254,26 +254,33 @@ func print_maze(maze, data = false):
 func update_tilemap(maze):
 	var tilemap = get_node("Navigation2D/TileMap")
 	for i in range (-1,xwide+1):
-		tilemap.set_cell(i,-1,0)
+		tilemap.set_cell(i,-1,1)
 	for i in range (-1,xwide+1):
-		tilemap.set_cell(i,yhigh,0)
+		tilemap.set_cell(i,yhigh,1)
 	for j in range (-1,yhigh+1):
-		tilemap.set_cell(-1,j,0)
+		tilemap.set_cell(-1,j,1)
 	for j in range (-1,yhigh+1):
-		tilemap.set_cell(xwide,j,0)
+		tilemap.set_cell(xwide,j,1)
 	for i in range (0,xwide):
 		for j in range(0,yhigh):
+			var flip = randi() % 4
+			var flip_x = false
+			var flip_y = false
+			if flip == 1:
+				flip_x = true
+			elif flip == 2:
+				flip_y = true
+			elif flip == 3:
+				flip_x = true
+				flip_y = true
 			if field[i][j] == 0:
-				tilemap.set_cell(i,j,0)
+				tilemap.set_cellv(Vector2(i,j),1,flip_x,flip_y )
 			else:
-				tilemap.set_cell(i,j,1)
+				tilemap.set_cellv(Vector2(i,j),0)
+				
+				
 	
 func generate_path(from, to):
 	var path = Array( get_node("Navigation2D").get_simple_path( from, to, false ))
 	return path
 	
-
-
-#func _draw():
-#	for i in range(path.size()-1):
-#		draw_line( path[i], path[i+1], Color(1,0,0,1), 2 )

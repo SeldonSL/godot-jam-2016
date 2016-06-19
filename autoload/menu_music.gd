@@ -10,3 +10,7 @@ func _ready():
 
 
 
+
+
+func _on_MenuMusic_finished():
+	pass # replace with function body
