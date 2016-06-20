@@ -6,7 +6,7 @@ export var speed = 3 # player speed
 export var life = 100 # player life
 var isShooting = false
 var shootAngle = 0
-var last_angle = 0
+var last_angle = Vector2(0,0)
 var mousePos = Vector2(0,0)
 var currentLife = life
 
@@ -31,17 +31,17 @@ func _process(delta):
 			
 	move(dir.normalized() * speed * delta)
 	if dir == Vector2(0,0):
-		set_rot(last_angle)
+		look_at(last_angle)
 	else:
-		last_angle = Vector2(0,0).angle_to_point(dir)-3.14159 
-		set_rot(last_angle)
+		
+		set_rot(Vector2(0,0).angle_to_point(dir)-3.14159 )
 	
 	# Shooting
 	if Input.is_action_pressed("M_SHOOT"):
 		look_at(mousePos)
-		
+		last_angle = mousePos
 		shootAngle = get_pos().angle_to_point(mousePos)
-		last_angle = shootAngle + 3.14159
+		#last_angle = shootAngle + 3.14159
 		shootAngle = - (shootAngle - 3.14159/2) + 3.141519
 		isShooting = true
 		

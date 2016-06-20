@@ -1,4 +1,4 @@
 [General]
 
-Music=false
+Music=true
 SoundFx=false

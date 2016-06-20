@@ -5,6 +5,7 @@ var weaponReady = true
 var angle_noise =  [-3.14159/100, 0, 3.14159/100]
 var angle_noise_index = 0
 var bullet = preload("res://Game/Weapons/bullet_1.tscn")
+onready var sound = get_node("/root/menu_music/SamplePlayer")
 
 
 func _ready():
@@ -34,6 +35,9 @@ func fire_weapon(angle):
 		# reset timer for next bullet
 		weaponReady = false
 		get_node("Timer").start()
+		
+		# play sound
+		sound.play("Laser_09", true)
 		
 func _on_Timer_timeout():
 	weaponReady = true

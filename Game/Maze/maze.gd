@@ -47,6 +47,7 @@ func _ready():
 
 
 func shuffleArray(a):
+	randomize()
 	for i in range (0,a.size()-2):
 		var j =  i + randi()%(a.size() - i)
 		var tmp = a[i]

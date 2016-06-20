@@ -14,8 +14,7 @@ func _ready():
 
 
 func _on_PlayButton_pressed():
-	get_node("/root/menu_music").stop()
-	pass # replace with function body
+	get_node("/root/sceneManager").goto_scene("res://Game/test_level.tscn")
 
 
 func _on_OptionsButton_pressed():

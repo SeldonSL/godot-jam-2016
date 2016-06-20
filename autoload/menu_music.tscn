@@ -1,14 +1,37 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=14 format=1]
 
-[ext_resource path="res://autoload/Juhani Junkala [Retro Game Music Pack] Title Screen.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Music/6_0.ogg" type="AudioStream" id=1]
 [ext_resource path="res://autoload/menu_music.gd" type="Script" id=2]
+[ext_resource path="res://SoundFX/Laser_00.smp" type="Sample" id=3]
+[ext_resource path="res://SoundFX/Laser_01.smp" type="Sample" id=4]
+[ext_resource path="res://SoundFX/Laser_02.smp" type="Sample" id=5]
+[ext_resource path="res://SoundFX/Laser_03.smp" type="Sample" id=6]
+[ext_resource path="res://SoundFX/Laser_04.smp" type="Sample" id=7]
+[ext_resource path="res://SoundFX/Laser_05.smp" type="Sample" id=8]
+[ext_resource path="res://SoundFX/Laser_06.smp" type="Sample" id=9]
+[ext_resource path="res://SoundFX/Laser_07.smp" type="Sample" id=10]
+[ext_resource path="res://SoundFX/Laser_08.smp" type="Sample" id=11]
+[ext_resource path="res://SoundFX/Laser_09.smp" type="Sample" id=12]
+
+[sub_resource type="SampleLibrary" id=1]
+
+samples/Laser_04 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 7 ) }
+samples/Laser_02 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 5 ) }
+samples/Laser_06 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 9 ) }
+samples/Laser_00 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 3 ) }
+samples/Laser_01 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 4 ) }
+samples/Laser_03 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 6 ) }
+samples/Laser_07 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 10 ) }
+samples/Laser_05 = { "db":-5.0, "pitch":1.0, "sample":ExtResource( 8 ) }
+samples/Laser_09 = { "db":-15.0, "pitch":1.0, "sample":ExtResource( 12 ) }
+samples/Laser_08 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 11 ) }
 
 [node name="MenuMusic" type="StreamPlayer"]
 
 stream/stream = ExtResource( 1 )
 stream/play = false
-stream/loop = true
-stream/volume_db = 10.0
+stream/loop = false
+stream/volume_db = 5.0
 stream/autoplay = false
 stream/paused = false
 stream/loop_restart_time = 0.0
@@ -16,6 +39,21 @@ stream/buffering_ms = 500
 script/script = ExtResource( 2 )
 __meta__ = { "__editor_plugin_screen__":"Script" }
 
-[connection signal="finished" from="." to="." method="_on_MenuMusic_finished"]
+[node name="SamplePlayer" type="SamplePlayer" parent="."]
+
+config/polyphony = 10
+config/samples = SubResource( 1 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
 
