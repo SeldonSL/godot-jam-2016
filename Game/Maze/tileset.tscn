@@ -29,6 +29,7 @@ enabled = true
 [node name="Wall" type="Sprite" parent="."]
 
 texture = ExtResource( 2 )
+__meta__ = { "_editor_collapsed":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
 
@@ -44,6 +45,30 @@ friction = 1.0
 bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Outer_wall" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Outer_wall"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer_wall/StaticBody2D"]
 
 shape = SubResource( 2 )
 trigger = false

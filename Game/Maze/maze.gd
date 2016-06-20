@@ -34,6 +34,11 @@ var field = []
 #list of coordinates of exposed but undetermined cells.
 var frontier = []
 
+# keeps count of tile damage to destroy it
+var tile_damage = []
+var tile_strength = 10
+
+
 const E = 2.71828182846
 
 func _ready():
@@ -59,9 +64,12 @@ func shuffleArray(a):
 func init():
 	for y in range(yhigh):
 		var row = []
+		var tile_dam = []
 		for x in range(xwide):
-        	row.append(-2)
+			row.append(-2)
+			tile_dam.append(0)
 		field.append(row)
+		tile_damage.append(tile_dam)
 
 func carve(y, x):
     #Make the cell at y,x a space.
@@ -255,13 +263,13 @@ func print_maze(maze, data = false):
 func update_tilemap(maze):
 	var tilemap = get_node("Navigation2D/TileMap")
 	for i in range (-1,xwide+1):
-		tilemap.set_cell(i,-1,1)
+		tilemap.set_cell(i,-1,2)
 	for i in range (-1,xwide+1):
-		tilemap.set_cell(i,yhigh,1)
+		tilemap.set_cell(i,yhigh,2)
 	for j in range (-1,yhigh+1):
-		tilemap.set_cell(-1,j,1)
+		tilemap.set_cell(-1,j,2)
 	for j in range (-1,yhigh+1):
-		tilemap.set_cell(xwide,j,1)
+		tilemap.set_cell(xwide,j,2)
 	for i in range (0,xwide):
 		for j in range(0,yhigh):
 			var flip = randi() % 4
@@ -285,3 +293,13 @@ func generate_path(from, to):
 	var path = Array( get_node("Navigation2D").get_simple_path( from, to, false ))
 	return path
 	
+func add_life(damage, tile_pos):
+	
+	var tilemap = get_node("Navigation2D/TileMap")	
+	var tile = tilemap.get_cellv(tile_pos)
+	
+	if tile == 1:
+		tile_damage[tile_pos.x][tile_pos.y] += 1
+		if (tile_damage[tile_pos.x][tile_pos.y] >= tile_strength):
+			tilemap.set_cellv(tile_pos,0)
+

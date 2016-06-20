@@ -6,29 +6,36 @@ var speed = 850 # movement speed
 var life = 1 # total life Points
 var power = 1 # damage done when hiting player or object
 var aggressiveness = 0.5  # chase the player probability (1.0 always chasing, 0.0 never chase). It depends if player in sight
-var current_aggressiveness = aggressiveness
-
-var currentLife = 0 # current life points. If zero = dead
-var path = [] # current navigation path
-var is_moving = false
-var has_player_lock = false
-var ang = 0
+var fov = 400 # distance to see and go after player
+var has_weapon = false # true if a a weapon
+var weapon_energy = -1 # -1 if no weapon, 0 -> 1 otherwise
 
 var color_red = Color(0.635, 0.071, 0.196)
 var color_dark = Color(0, 0, 0)
 var color_white = Color(0.871, 0.808, 0.612)
 var color_green = Color(0.125, 0.38, 0.357)
 
+
+#Enemy state
+var current_aggressiveness = aggressiveness
+var currentLife = life # current life points. If zero = dead
+var path = [] # current navigation path
+var is_moving = false
+var has_player_lock = false
+var ang = 0
+
+
+
 onready var sound = get_node("/root/menu_music/SamplePlayer")
 
 func _ready():
 	# Initialization here
 	randomize()
-	currentLife = life
 	add_to_group("enemies")
-	set_process(true)
+	
 	var w = randf()*0.4 + 0.8
 	var h = randf()*0.4 + 0.8
+	set_process(true)
 	update()
 	set_scale(Vector2(w * get_scale().x,h*get_scale().y))
 	
@@ -42,7 +49,7 @@ func _process(delta):
 	if !has_player_lock:
 
 		var dist = get_pos().distance_to(player_pos)
-		if dist < 400: # check value
+		if dist < fov: 
 			path = []
 			current_aggressiveness = 1.0
 			has_player_lock = true
@@ -118,11 +125,6 @@ func add_life(lifeValue):
 		update()
 
 
-
-func _on_Shoot_timer_timeout():
-	get_node("Weapon").fire_weapon(0)
-
-
 func _on_Enemy_area_enter( area ):
 	if (area.has_method("add_life")):
 		area.add_life(-power)
@@ -134,9 +136,25 @@ func _on_Enemy_body_enter( body ):
 
 
 func _draw():
+	var n_circles = 0
+	if has_weapon:
+		n_circles += 1
+	if life >= 10:
+		n_circles += 1
+	if power >=3:
+		n_circles += 1
+	if weapon_energy >= 0.5:
+		n_circles += 1
+
 	if currentLife > 0:
-		draw_circle(Vector2(0,0),60, color_red)
-		draw_circle(Vector2(0,0),30, color_white)
+		draw_circle(Vector2(0,0),200, color_red)	
+		draw_circle(Vector2(0,0),160, color_white)	
+		for i in range (0,4):
+			var x = randi()%100-50
+			var y = randi()%100-50
+			draw_circle(Vector2(x,y),40, color_red)
+			draw_circle(Vector2(x,y),20, color_dark)	
+		
 	else:
 		pass
 
@@ -153,4 +171,5 @@ func _on_Timer_timeout():
 	path = []
 	currentLife = life
 	set_monitorable(true)
+	current_aggressiveness = aggressiveness
 	update()

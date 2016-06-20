@@ -61,14 +61,27 @@ func _input(ev):
 	
 	if (ev.type==InputEvent.MOUSE_BUTTON):
 		if ev.is_action_pressed("M_SEC_SHOOT"):			
-			OS.set_time_scale(0.5)#slow down the game 2 times
-	
+			#OS.set_time_scale(0.5)#slow down the game 2 times
+		
+			test_tile(get_global_mouse_pos())
 		
 
 func add_life(lifeValue):
-	print (currentLife)
+	#print (currentLife)
 	currentLife += lifeValue
 	if currentLife <= 0:
-		print ("I am dead!, GAME OVER")
+		pass
+		#print ("I am dead!, GAME OVER")
 		#queue_free()
-		
+
+func test_tile(pos):
+	print (pos)
+	var tilemap = get_node("/root/TestLevel/Maze/Navigation2D/TileMap")
+	var tile_pos = tilemap.world_to_map(pos)*1.0/tilemap.get_scale().x
+	tile_pos = Vector2(floor(tile_pos.x), floor(tile_pos.y))
+	
+	var tile = tilemap.get_cellv(tile_pos)
+	tilemap.set_cellv(tile_pos, -1)
+	print (tile_pos)
+	print (tile)
+	
