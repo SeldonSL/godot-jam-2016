@@ -13,7 +13,7 @@ var weapon_energy = -1 # -1 if no weapon, 0 -> 1 otherwise
 var color_red = Color(0.635, 0.071, 0.196)
 var color_dark = Color(0, 0, 0)
 var color_white = Color(0.871, 0.808, 0.612)
-var color_green = Color(0.125, 0.38, 0.357)
+var color_blue = Color(0.125, 0.38, 0.357)
 
 
 #Enemy state

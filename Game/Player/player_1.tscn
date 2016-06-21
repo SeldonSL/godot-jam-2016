@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Game/Player/player_1.gd" type="Script" id=1]
 [ext_resource path="res://Game/Player/nave.png" type="Texture" id=2]
-[ext_resource path="res://Game/Weapons/weapon_1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Game/Player/thrust_particle.png" type="Texture" id=4]
+[ext_resource path="res://Game/Player/thrust_particle.png" type="Texture" id=3]
+[ext_resource path="res://Game/Weapons/weapon_1.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -24,7 +24,7 @@ colors = ColorArray( 0.870588, 0.807843, 0.611765, 1, 0.180392, 0.47451, 0.72941
 transform/scale = Vector2( 0.21, 0.2 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, -50 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -50 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -46,8 +46,6 @@ _update_shape_index = 0
 transform/rot = 270.0
 frames = SubResource( 2 )
 
-[node name="Weapon" parent="." instance=ExtResource( 3 )]
-
 [node name="Particles2D" type="Particles2D" parent="."]
 
 transform/pos = Vector2( 0, -65 )
@@ -57,7 +55,7 @@ config/preprocess = 0.2
 config/emitting = false
 config/local_space = false
 config/explosiveness = 0.2
-config/texture = ExtResource( 4 )
+config/texture = ExtResource( 3 )
 params/direction = 0.0
 params/spread = 180.0
 params/linear_velocity = 100.0
@@ -75,5 +73,7 @@ params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
 color/color_ramp = SubResource( 3 )
+
+[node name="Weapon" parent="." instance=ExtResource( 4 )]
 
 

@@ -1,12 +1,12 @@
 
 extends Node
 
-export var enemies = 10
+export var enemies = 100
 var enemy_1 = preload("res://Game/Enemies/enemy_1.tscn") # will load when parsing the script
 var swarmer_percent = 0.5
 var shooter_percent = 0.3
 var monster_percent = 0.2
-var enemy_energy = 1
+var enemy_energy = 2
 
 func _ready():
 	# Called every time the node is added to the scene.

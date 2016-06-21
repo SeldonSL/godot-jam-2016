@@ -15,10 +15,7 @@ func fire_weapon(angle):
 	
 	if (weaponReady):
 
-		# play sound effect		
-		#get_tree().get_root().get_node("TestLevel/SamplePlayer").play("Shoot_06")
-		
-		# create bullet node
+ 		# create bullet node
 		var b = bullet.instance()
 		b.set_rot(3*PI/2-angle)
 		add_child(b)
