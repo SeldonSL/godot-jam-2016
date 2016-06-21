@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Game/Maze/tile1.png" type="Texture" id=1]
 [ext_resource path="res://Game/Maze/tile.png" type="Texture" id=2]
+[ext_resource path="res://Game/Maze/tile_destroy.png" type="Texture" id=3]
 
 [sub_resource type="NavigationPolygon" id=1]
 
@@ -69,6 +70,30 @@ friction = 1.0
 bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Outer_wall/StaticBody2D"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Destroyed_wall" type="Sprite" parent="."]
+
+texture = ExtResource( 3 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Destroyed_wall"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Destroyed_wall/StaticBody2D"]
 
 shape = SubResource( 2 )
 trigger = false

@@ -3,11 +3,11 @@ extends Area2D
 
 # Enemy variables
 var speed = 850 # movement speed
-var life = 1 # total life Points
-var power = 1 # damage done when hiting player or object
+var life = 10 # total life Points
+var power = 5 # damage done when hiting player or object
 var aggressiveness = 0.5  # chase the player probability (1.0 always chasing, 0.0 never chase). It depends if player in sight
-var fov = 400 # distance to see and go after player
-var has_weapon = false # true if a a weapon
+var fov = 600 # distance to see and go after player
+var has_weapon = true # true if a a weapon
 var weapon_energy = -1 # -1 if no weapon, 0 -> 1 otherwise
 
 var color_red = Color(0.635, 0.071, 0.196)
@@ -23,31 +23,37 @@ var path = [] # current navigation path
 var is_moving = false
 var has_player_lock = false
 var ang = 0
-
+var angle_draw = 0
 
 
 onready var sound = get_node("/root/menu_music/SamplePlayer")
 
 func _ready():
-	# Initialization here
+
+	#scale
 	randomize()
+	var wh_ratio = randf()*0.4 + 0.6
+	angle_draw = randi()%60 + 30
+	set_scale(Vector2(get_scale().x * wh_ratio, get_scale().y))
+	currentLife = life
+	current_aggressiveness = aggressiveness
+	#add to group and enable process
 	add_to_group("enemies")
-	
-	var w = randf()*0.4 + 0.8
-	var h = randf()*0.4 + 0.8
 	set_process(true)
+	# draw	
+	update() 
+
+func update_params():
+	currentLife = life
+	current_aggressiveness = aggressiveness
 	update()
-	set_scale(Vector2(w * get_scale().x,h*get_scale().y))
-	
-	
-	
 	
 func _process(delta):
-
 	var player_pos = get_node("../../../TestLevel/Human Player").get_pos()
+	
 	#check if player is close -> follow
-	if !has_player_lock:
-
+	if !has_player_lock:		
+		
 		var dist = get_pos().distance_to(player_pos)
 		if dist < fov: 
 			path = []
@@ -57,6 +63,8 @@ func _process(delta):
 			
 			has_player_lock = false
 			current_aggressiveness = aggressiveness
+			
+		# TODO: activate weapon
 		
 	if (is_moving):
 		## Movimiento nav-mesh
@@ -81,8 +89,12 @@ func _process(delta):
 			set_rot(ang)
 			
 			#noise
-			var noise_x = randi()%10-5
-			var noise_y = randi()%10-5
+			var noise_x = 0
+			var noise_y = 0
+			if life <= 3:
+				var noise_x = randi()%10-5
+				var noise_y = randi()%10-5
+			
 			
 			set_pos(atpos + Vector2(noise_x, noise_y))
 			
@@ -122,7 +134,8 @@ func add_life(lifeValue):
 		get_node("Timer").start()
 		set_monitorable(false)
 		sound.play("Laser_05", true)
-		update()
+	
+	update()
 
 
 func _on_Enemy_area_enter( area ):
@@ -136,30 +149,26 @@ func _on_Enemy_body_enter( body ):
 
 
 func _draw():
-	var n_circles = 0
-	if has_weapon:
-		n_circles += 1
-	if life >= 10:
-		n_circles += 1
-	if power >=3:
-		n_circles += 1
-	if weapon_energy >= 0.5:
-		n_circles += 1
 
+	var border_ratio = -1 * tan(life * 0.075/10)*(power+2) + 5 * tan(life*0.075/10) + 0.5
+	
 	if currentLife > 0:
-		draw_circle(Vector2(0,0),200, color_red)	
-		draw_circle(Vector2(0,0),160, color_white)	
-		for i in range (0,4):
-			var x = randi()%100-50
-			var y = randi()%100-50
-			draw_circle(Vector2(x,y),40, color_red)
-			draw_circle(Vector2(x,y),20, color_dark)	
+		draw_circle(Vector2(0,0), 60, color_red)
+		draw_circle(Vector2(0,0), 60 * border_ratio, color_white)	
+		var x = 0
+		var y = 0
+		var angle_tmp = angle_draw
+		for i in range (0,currentLife-1):
+			x = x + 90 * cos(angle_tmp)
+			y = y + 90 * sin(angle_tmp)
+			draw_circle(Vector2(x,y), 60, color_red)
+			draw_circle(Vector2(x,y), border_ratio*60, color_white)	
+			angle_tmp += angle_tmp
+		
 		
 	else:
 		pass
 
-
-	
 	
 	
 func _on_Timer_timeout():

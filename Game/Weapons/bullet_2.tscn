@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://Game/Weapons/bullet_1.gd" type="Script" id=1]
+[ext_resource path="res://Game/Weapons/bullet_2.gd" type="Script" id=1]
 [ext_resource path="res://Game/Weapons/bullet-enemy.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -21,7 +21,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"2D" }
-Speed = 1500
+Speed = 1
 Damage = 1
 
 [node name="Sprite" type="Sprite" parent="."]

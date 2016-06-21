@@ -14,7 +14,7 @@ func _ready():
 	
 func _fixed_process(delta):
 
-	var pos = self.get_pos()
+	var pos = self.get_pos()	
 
 
 	pos += Vector2(cos(angle) * Speed * delta, sin(angle) * Speed * delta)	

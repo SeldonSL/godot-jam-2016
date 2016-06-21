@@ -67,12 +67,14 @@ func _input(ev):
 		
 
 func add_life(lifeValue):
-	#print (currentLife)
+	print (lifeValue)
 	currentLife += lifeValue
 	if currentLife <= 0:
 		pass
 		#print ("I am dead!, GAME OVER")
 		#queue_free()
+	if currentLife > life:
+		currentLife = life
 
 func test_tile(pos):
 	print (pos)

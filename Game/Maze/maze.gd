@@ -298,8 +298,11 @@ func add_life(damage, tile_pos):
 	var tilemap = get_node("Navigation2D/TileMap")	
 	var tile = tilemap.get_cellv(tile_pos)
 	
-	if tile == 1:
+	if tile == 1 or tile == 3:
 		tile_damage[tile_pos.x][tile_pos.y] += 1
+		
+		if (tile_damage[tile_pos.x][tile_pos.y] >= tile_strength/3):
+			tilemap.set_cellv(tile_pos,3, tilemap.is_cell_x_flipped(tile_pos.x, tile_pos.y), tilemap.is_cell_y_flipped(tile_pos.x, tile_pos.y))
 		if (tile_damage[tile_pos.x][tile_pos.y] >= tile_strength):
 			tilemap.set_cellv(tile_pos,0)
 

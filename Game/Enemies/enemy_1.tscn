@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 60, 60 )
+extents = Vector2( 150, 150 )
 
 [sub_resource type="ColorRamp" id=2]
 
