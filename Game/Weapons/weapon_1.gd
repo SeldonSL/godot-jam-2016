@@ -10,6 +10,8 @@ onready var sound = get_node("/root/menu_music/SamplePlayer")
 
 func _ready():
 	pass
+
+
 	
 func fire_weapon(angle):
 	
@@ -28,11 +30,11 @@ func fire_weapon(angle):
 		angle_noise_index += 1
 		if (angle_noise_index == 9):
 			angle_noise_index == 0
-				
+		
 		# reset timer for next bullet
 		weaponReady = false
 		get_node("Timer").start()
-		
+
 		# play sound
 		sound.play("Laser_09", true)
 		

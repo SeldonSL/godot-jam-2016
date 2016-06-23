@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Game/Maze/tile1.png" type="Texture" id=1]
 [ext_resource path="res://Game/Maze/tile.png" type="Texture" id=2]
 [ext_resource path="res://Game/Maze/tile_destroy.png" type="Texture" id=3]
+[ext_resource path="res://Game/Maze/tile_destroy2.png" type="Texture" id=4]
 
 [sub_resource type="NavigationPolygon" id=1]
 
@@ -53,7 +54,7 @@ _update_shape_index = 0
 
 [node name="Outer_wall" type="Sprite" parent="."]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 __meta__ = { "_editor_collapsed":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Outer_wall"]
@@ -77,7 +78,7 @@ _update_shape_index = 0
 
 [node name="Destroyed_wall" type="Sprite" parent="."]
 
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 __meta__ = { "_editor_collapsed":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Destroyed_wall"]

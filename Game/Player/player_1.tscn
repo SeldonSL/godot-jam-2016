@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Game/Player/player_1.gd" type="Script" id=1]
 [ext_resource path="res://Game/Player/nave.png" type="Texture" id=2]
@@ -10,11 +10,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 200, 150 )
 
-[sub_resource type="SpriteFrames" id=2]
-
-frames = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
-
-[sub_resource type="ColorRamp" id=3]
+[sub_resource type="ColorRamp" id=2]
 
 offsets = FloatArray( 0, 0.666667 )
 colors = ColorArray( 0.870588, 0.807843, 0.611765, 1, 0.180392, 0.47451, 0.729412, 1 )
@@ -32,7 +28,7 @@ collision/margin = 0.08
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"Script" }
 speed = 3
-life = 100
+life = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -41,10 +37,10 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="Sprite" type="AnimatedSprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 
 transform/rot = 270.0
-frames = SubResource( 2 )
+texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 
@@ -72,7 +68,7 @@ params/final_size = 3.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-color/color_ramp = SubResource( 3 )
+color/color_ramp = SubResource( 2 )
 
 [node name="Weapon" parent="." instance=ExtResource( 4 )]
 

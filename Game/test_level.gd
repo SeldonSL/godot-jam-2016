@@ -3,6 +3,7 @@ extends Node
 
 export var enemies = 100
 var enemy_1 = preload("res://Game/Enemies/enemy_1.tscn") # will load when parsing the script
+var enemy_w = preload("res://Game/Weapons/weapon_enemy.tscn") # will load when parsing the script
 var swarmer_percent = 0.5
 var shooter_percent = 0.3
 var monster_percent = 0.2
@@ -58,8 +59,21 @@ func create_enemy_shooter(energy):
 	enemy_node.power = 1 + round(param_array[2]*4)
 	enemy_node.aggressiveness = param_array[3]*0.8
 	enemy_node.fov = 600 + round(param_array[4]*100)
+		
+	# add weapon
 	enemy_node.has_weapon = true
-	enemy_node.weapon_energy = 0.3 + param_array[5]*0.4
+	enemy_node.weapon_energy = param_array[5] * 2 + 1
+	var weapon = enemy_w.instance()
+	var weapon_params = generate_random_distribution(4, enemy_node.weapon_energy, null, 1.0)
+	weapon.n_bullets = 1 + weapon_params[0]*9
+	weapon.n_rounds = 1 + weapon_params[1]*2
+	weapon.time_1 = 5 + weapon_params[2]*5
+	weapon.time_2 = 0.3 + weapon_params[3]*0.7
+	weapon.ang_speed = PI/6 + randf()*2*PI*6
+	weapon.update_params()
+	enemy_node.add_child(weapon)
+	
+	
 	enemy_node.update_params()
 	get_node("Enemies").add_child(enemy_node)
 
@@ -77,10 +91,23 @@ func create_enemy_monster(energy):
 	enemy_node.power = 3 + round(param_array[2]*2)
 	enemy_node.aggressiveness = param_array[3]*0.5
 	enemy_node.fov = 400 + round(param_array[4]*300)
+	
+	# add weapon
 	var weapon_bool = randf()
 	if weapon_bool >= 0.5:
 		enemy_node.has_weapon = true
-		enemy_node.weapon_energy = 0.7 * param_array[5]*0.3
+		enemy_node.weapon_energy = param_array[5] * 4 + 2
+		var weapon = enemy_w.instance()
+		var weapon_params = generate_random_distribution(4, enemy_node.weapon_energy, null, 1.0)
+		weapon.n_bullets = 1 + weapon_params[0]*9
+		weapon.n_rounds = 1 + weapon_params[1]*2
+		weapon.time_1 = 5 + weapon_params[2]*5
+		weapon.time_2 = 0.3 + weapon_params[3]*0.7
+		weapon.ang_speed = PI/6 + randf()*2*PI*6
+		weapon.update_params()
+		enemy_node.add_child(weapon)
+		
+		
 	enemy_node.update_params()
 	get_node("Enemies").add_child(enemy_node)
 
@@ -100,10 +127,23 @@ func create_enemy_random(energy):
 	enemy_node.power = 1 + round(param_array[2]*4)
 	enemy_node.aggressiveness = param_array[3]
 	enemy_node.fov = 400 + round(param_array[4]*300)
+	
+	# add weapon
 	var weapon_bool = randf()
 	if weapon_bool >= 0.5:
 		enemy_node.has_weapon = true
-		enemy_node.weapon_energy = param_array[5]
+		enemy_node.weapon_energy = param_array[5] * 3 + 1
+		var weapon = enemy_w.instance()
+		var weapon_params = generate_random_distribution(4, enemy_node.weapon_energy, null, 1.0)
+		weapon.n_bullets = 1 + weapon_params[0]*9
+		weapon.n_rounds = 1 + weapon_params[1]*2
+		weapon.time_1 = 5 + weapon_params[2]*5
+		weapon.time_2 = 0.3 + weapon_params[3]*0.7
+		weapon.ang_speed = PI/6 + randf()*2*PI*6
+		weapon.update_params()
+		enemy_node.add_child(weapon)
+		
+	# update parameters
 	enemy_node.update_params()
 	get_node("Enemies").add_child(enemy_node)
 

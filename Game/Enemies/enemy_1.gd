@@ -135,7 +135,7 @@ func add_life(lifeValue):
 		set_monitorable(false)
 		sound.play("Laser_05", true)
 	
-	update()
+
 
 
 func _on_Enemy_area_enter( area ):
@@ -146,6 +146,13 @@ func _on_Enemy_area_enter( area ):
 func _on_Enemy_body_enter( body ):
 	if (body.has_method("add_life")):
 		body.add_life(-power)
+		get_node("Particles2D").set_emitting(true)
+		set_process(false)
+		get_node("Timer").start()
+		set_monitorable(false)
+		sound.play("Laser_05", true)
+		currentLife = -1
+		update()
 
 
 func _draw():

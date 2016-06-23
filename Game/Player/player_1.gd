@@ -53,8 +53,6 @@ func _process(delta):
 		shootAngle = - (shootAngle - 3.14159/2) + 3.141519
 		isShooting = true
 		
-		if get_node("Sprite").get_frame() == 0:
-			get_node("Sprite").set_frame(1)
 		
 		get_node("Weapon").fire_weapon(shootAngle)
 		
@@ -82,9 +80,9 @@ func add_life(lifeValue):
 	
 	currentLife += lifeValue
 	if currentLife <= 0:
+		print ("I am dead!, GAME OVER")
 		return
-		#print ("I am dead!, GAME OVER")
-		#queue_free()
+		queue_free()
 	if currentLife > life:
 		currentLife = life
 
@@ -101,7 +99,6 @@ func change_weapon():
 		weapon_level = 2
 		var w = weapon_2.instance()		
 		add_child(w)
-		print (get_child(3).get_name())
 	elif weapon_level == 2:
 		weapon_level = 3
 		var w = weapon_3.instance()

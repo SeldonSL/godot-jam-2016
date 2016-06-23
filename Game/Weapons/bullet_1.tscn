@@ -22,7 +22,7 @@ angular_damp = 1.0
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"2D" }
 Speed = 1500
-Damage = 1
+Damage = 0.5
 
 [node name="Sprite" type="Sprite" parent="."]
 
