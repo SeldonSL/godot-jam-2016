@@ -220,8 +220,15 @@ func generate_random_distribution(N, M, min_num = null, max_num = null):
 	return out_array
 	
 func add_mission():
-	var mission = load("res://Game/Objectives/enemy_nexus.tscn")
-	var mission_inst = mission.instance()
+	
+	var mission = null
+	var m_rand = randf()
+	if m_rand < 0.5:
+		mission = load("res://Game/Objectives/enemy_nexus.tscn")
+	else:
+		mission = load("res://Game/Objectives/player_nexus.tscn")
+		
+	mission_inst = mission.instance()
 	add_child(mission_inst)
 
 func _notification(what):

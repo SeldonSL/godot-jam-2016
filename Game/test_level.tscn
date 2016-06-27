@@ -10,7 +10,7 @@
 [ext_resource path="res://Game/GUI/energy.png" type="Texture" id=8]
 [ext_resource path="res://Game/GUI/hud_bottom.png" type="Texture" id=9]
 [ext_resource path="res://MainMenuScene/exit_popup.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Game/Objectives/player_nexus.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Game/Objectives/enemy_nexus.tscn" type="PackedScene" id=11]
 
 [node name="TestLevel" type="Node"]
 
@@ -291,16 +291,16 @@ scale = Vector2( 1, 1 )
 
 [node name="ExitPopup" parent="CanvasLayer" instance=ExtResource( 10 )]
 
-[node name="Player Nexus" parent="." instance=ExtResource( 11 )]
-
-linear_damp = 0.1
-
 [node name="Timer" type="Timer" parent="."]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = true
+
+[node name="Enemy Nexus" parent="." instance=ExtResource( 11 )]
+
+linear_damp = 0.1
 
 [connection signal="pressed" from="CanvasLayer/ExitPopup/Panel/OKButton" to="." method="_on_OKButton_pressed"]
 
