@@ -20,7 +20,7 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 collision/layers = 8
-collision/mask = 6
+collision/mask = 70
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"2D" }
 Speed = 1500
@@ -41,7 +41,7 @@ _update_shape_index = 0
 [node name="Timer" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 0.75
+wait_time = 1.0
 one_shot = true
 autostart = true
 

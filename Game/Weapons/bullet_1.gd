@@ -32,12 +32,12 @@ func _on_Timer_timeout():
 func _on_Bullet_area_enter( area ):
 
 	if (area.has_method("add_life")):
+		
 		area.add_life(-Damage)
 		self.queue_free() 
 
 
 func _on_Bullet_body_enter( body ):
-
 
 	var tile_pos = tilemap.world_to_map(get_pos()*1.0/tilemap.get_scale().x  +Vector2(cos(angle) * 50, sin(angle) *50))
 	tile_pos = Vector2(floor(tile_pos.x), floor(tile_pos.y))

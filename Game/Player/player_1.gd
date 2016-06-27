@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 # Actions
 export var speed = 3 # player speed
-export var life = 100 # player life
+export var life = 200 # player life
 var isShooting = false
 var shootAngle = 0
 var last_angle = Vector2(0,0)
@@ -26,6 +26,9 @@ var shield_damage = 0
 var move_actions = { "K_MOVE_LEFT":Vector2(-1,0), "K_MOVE_RIGHT":Vector2(1,0), "K_MOVE_UP":Vector2(0,-1), "K_MOVE_DOWN":Vector2(0,1) }
 
 var path = []
+var maze_size = null
+var maze_tilemap = null
+
 
 func _ready():
 	set_process(true)
@@ -33,10 +36,14 @@ func _ready():
 	get_node("/root/TestLevel/ui/top/Life").set_value(currentLife)
 	get_node("/root/TestLevel/ui/top/Life").set_max(life)
 	get_node("/root/TestLevel/ui/top/lives").set_text(str(lives))
+	maze_size = get_node("/root/configFileManager").getMazeSize()
+	maze_tilemap = get_node("/root/TestLevel/Maze/Navigation2D/TileMap")
 	
-
 func _process(delta):	
 	
+	if lives <= 0:
+		print ("DEAD: Game Over")
+		
 	# Movement
 	var dir = Vector2(0,0)
 	
@@ -163,10 +170,23 @@ func draw_circle_arc( center, radius, angle_from, angle_to, color ):
         draw_line(points_arc[indexPoint], points_arc[indexPoint+1], color, 4)
 
 func _on_Timer_timeout():
-	var x = randi() % int(12900)#FIX
-	var y = randi() % int(12900)
+
+	# place player
+	var pre_pos = get_pos()
+	for i in range (0,100): #try a hundred times
+		var pos_x = randi()%(maze_size * 4 * 64) #maze:size * scale* tile_size
+		var pos_y = randi()%(maze_size * 4 * 64)
+		var tile_pos = maze_tilemap.world_to_map(Vector2(pos_x, pos_y)*1.0/maze_tilemap.get_scale().x)
+		tile_pos = Vector2(floor(tile_pos.x), floor(tile_pos.y))
+		if maze_tilemap.get_cellv(tile_pos) == 0:
+			set_pos(Vector2(pos_x, pos_y))
+			break
+		if i == 99:
+			set_pos(pre_pos)
+			break
+			
 	get_node("Particles2D").set_emitting(false)	
-	set_pos(Vector2(x,y))
+	
 	set_process(true)
 	get_node("Sprite").show()
 	currentLife = life

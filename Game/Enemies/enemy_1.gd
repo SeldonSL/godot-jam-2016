@@ -14,7 +14,7 @@ var color_red = Color(0.635, 0.071, 0.196)
 var color_dark = Color(0, 0, 0)
 var color_white = Color(0.871, 0.808, 0.612)
 var color_blue = Color(0.125, 0.38, 0.357)
-
+var root_node = null
 
 #Enemy state
 var current_aggressiveness = aggressiveness
@@ -28,9 +28,16 @@ var angle_draw = 0
 var maze_size = null
 onready var sound = get_node("/root/menu_music/SamplePlayer")
 
+var powerup1 = preload("res://Game/Objects/health_pickup.tscn")
+var powerup2 = preload("res://Game/Objects/weapon_pickup.tscn")
+var powerup3 = preload("res://Game/Objects/shield_pickup.tscn")
+
+
+
 func _ready():
 
 	maze_size = get_node("/root/configFileManager").getMazeSize()
+	root_node = get_node("/root/TestLevel")
 	#scale
 	randomize()
 	var wh_ratio = randf()*0.4 + 0.6
@@ -50,9 +57,6 @@ func update_params():
 	update()
 	
 func _process(delta):
-
-		
-
 	
 	#check if player is close -> follow
 	if !has_player_lock:		
@@ -141,12 +145,34 @@ func add_life(lifeValue):
 		set_monitorable(false)
 		sound.play("Laser_05", true)
 		get_node("/root/TestLevel").score += life*power
-		get_node("/root/TestLevel").enemies_killed += 1
-		var score = get_node("/root/TestLevel").score 
+		root_node.enemies_killed += 1
+		var n_kills = root_node.enemies_killed
+		if n_kills > 20:
+			root_node.enemies_killed = 0
+			var drop_powerup = randi()%5
+			if drop_powerup <=2:
+				drop_powerup(drop_powerup, get_pos())
+				
+		var score = root_node.score 
+		
 		get_node("/root/TestLevel/ui/top/Score").set_text("Score: "+str(score))
+	
 	update()
 
-
+func drop_powerup(power_index, pos):
+	if power_index == 0:
+		var p = powerup1.instance()
+		p.set_pos(pos)
+		root_node.add_child(p)
+	elif power_index == 1:
+		var p = powerup2.instance()
+		p.set_pos(pos)
+		root_node.add_child(p)
+	elif power_index == 2:
+		var p = powerup3.instance()
+		p.set_pos(pos)
+		root_node.add_child(p)
+		
 func _on_Enemy_area_enter( area ):
 	if (area.has_method("add_life")):
 		area.add_life(-power)

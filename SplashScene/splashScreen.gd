@@ -9,9 +9,9 @@ const STATE_FINISHED = 4
 var state = STATE_INIT
 
 var alpha = 0;
-export var fadeSpeed = 0.5;
-export var initTime = 1 #in seconds
-export var showingTime = 4
+export var fadeSpeed = 1;
+export var initTime = 0.5 #in seconds
+export var showingTime = 1.5
 export var logo_scale = Vector2(1.0,1.0)
 var timeWaited = 0
 

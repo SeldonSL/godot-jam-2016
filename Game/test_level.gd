@@ -17,7 +17,7 @@ var maze_tilemap = null
 var player = null
  
 var enemies_killed = 0
-
+var objectives_cleared = 0
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -42,7 +42,6 @@ func _ready():
 	# Level and score label
 	var level = get_node("/root/configFileManager").getLevel()
 
-	get_node("/root/TestLevel/ui/top/Level").set_text("Level: "+str(level))
 	get_node("/root/TestLevel/ui/top/Score").set_text("Score: "+str(score))
 	
 	# place player
@@ -53,7 +52,8 @@ func _ready():
 		tile_pos = Vector2(floor(tile_pos.x), floor(tile_pos.y))
 		if maze_tilemap.get_cellv(tile_pos) == 0:
 			player.set_pos(Vector2(pos_x, pos_y))
-			print (tile_pos)
+			break
+
 
 func create_enemy_swarmer(energy):
 
@@ -79,8 +79,8 @@ func create_enemy_swarmer(energy):
 func create_enemy_shooter(energy):
 	var enemy_node = enemy_1.instance()
 	# position
-	var pos_x = randi()%13000#FIX
-	var pos_y = randi()%13000#FIX
+	var pos_x = randi()%(maze_size * 4 * 64) #maze:size * scale* tile_size
+	var pos_y = randi()%(maze_size * 4 * 64)
 	enemy_node.set_pos(Vector2(pos_x, pos_y))
 	
 	# set parameters
@@ -111,8 +111,8 @@ func create_enemy_shooter(energy):
 func create_enemy_monster(energy):
 	var enemy_node = enemy_1.instance()
 	# position
-	var pos_x = randi()%13000#FIX
-	var pos_y = randi()%13000#FIX
+	var pos_x = randi()%(maze_size * 4 * 64) #maze:size * scale* tile_size
+	var pos_y = randi()%(maze_size * 4 * 64)
 	enemy_node.set_pos(Vector2(pos_x, pos_y))
 	
 	# set parameters
@@ -147,8 +147,8 @@ func create_enemy_monster(energy):
 func create_enemy_random(energy):
 	var enemy_node = enemy_1.instance()
 	# position
-	var pos_x = randi()%13000#FIX
-	var pos_y = randi()%13000#FIX
+	var pos_x = randi()%(maze_size * 4 * 64) #maze:size * scale* tile_size
+	var pos_y = randi()%(maze_size * 4 * 64)
 	enemy_node.set_pos(Vector2(pos_x, pos_y))
 	
 	# set parameters
@@ -219,8 +219,31 @@ func generate_random_distribution(N, M, min_num = null, max_num = null):
 
 	return out_array
 	
-
+func add_mission():
+	var mission = load("res://Game/Objectives/enemy_nexus.tscn")
+	var mission_inst = mission.instance()
+	add_child(mission_inst)
 
 func _notification(what):
-    if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
-        get_node("/root/sceneManager").goto_scene("res://MainMenuScene/main_menu.tscn")   
+	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
+		get_tree().set_pause(true)
+		get_node("CanvasLayer/ExitPopup").popup_centered()	         
+
+
+func _on_OKButton_pressed():
+    get_tree().quit() # default behavior
+
+
+func _on_CancelButton1_pressed():
+	get_node("CanvasLayer/ExitPopup").hide()
+	get_tree().set_pause(false)
+
+
+
+func _on_Timer_timeout():
+	if player.lives <= 0:
+		print ("GAME OVER")
+		get_tree().set_pause(true)
+		var popup_label = get_node("CanvasLayer/ExitPopup/Panel/Label")
+		popup_label.set_text("GAME OVER! Thanks you!")
+		get_node("CanvasLayer/ExitPopup").popup_centered()      

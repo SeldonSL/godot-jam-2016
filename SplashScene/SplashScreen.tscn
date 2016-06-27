@@ -8,9 +8,9 @@
 transform/pos = Vector2( 640, 360 )
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"Script" }
-fadeSpeed = 0.7
-initTime = 1
-showingTime = 2
+fadeSpeed = 1
+initTime = 0.5
+showingTime = 2.5
 logo_scale = Vector2( 0.25, 0.25 )
 
 [node name="myLogo" type="Sprite" parent="."]
