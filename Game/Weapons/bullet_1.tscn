@@ -19,10 +19,12 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision/layers = 8
+collision/mask = 6
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"2D" }
 Speed = 1500
-Damage = 0.5
+Damage = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 

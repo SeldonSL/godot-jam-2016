@@ -9,6 +9,6 @@ Features (tmp, in progress):
 * Procedural generated maze level with rooms
 * Procedural generated enemies
 * Lots of enemies and action! (hopefully)
-* Biological inspired art style
+* Code and artowrk licensed as explicited, except for Music, Sound FX and Font folders (licensed as said on those folders)
 
 

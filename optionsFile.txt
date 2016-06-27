@@ -1,4 +1,12 @@
 [General]
 
+Fullscreen=false
 Music=true
-SoundFx=false
+SoundFx=true
+
+[Game]
+
+Level=1
+MazeSize=50
+Enemies=100
+

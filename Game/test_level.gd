@@ -9,10 +9,24 @@ var shooter_percent = 0.3
 var monster_percent = 0.2
 var enemy_energy = 2
 
+var score = 0
+
+var maze_size = 0
+
+var maze_tilemap = null
+var player = null
+ 
+var enemies_killed = 0
+
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	randomize()
+	
+	maze_size = get_node("/root/configFileManager").getMazeSize()
+	maze_tilemap = get_node("Maze/Navigation2D/TileMap")
+	player = get_node("Human Player")
 	
 	for i in range(0, round(enemies*swarmer_percent)):
 		create_enemy_swarmer(enemy_energy)
@@ -25,12 +39,29 @@ func _ready():
 	get_node("/root/menu_music").in_game = true
 	get_node("/root/menu_music").stop()
 
+	# Level and score label
+	var level = get_node("/root/configFileManager").getLevel()
+
+	get_node("/root/TestLevel/ui/top/Level").set_text("Level: "+str(level))
+	get_node("/root/TestLevel/ui/top/Score").set_text("Score: "+str(score))
+	
+	# place player
+	for i in range (0,100): #try a hundred times
+		var pos_x = randi()%(maze_size * 4 * 64) #maze:size * scale* tile_size
+		var pos_y = randi()%(maze_size * 4 * 64)
+		var tile_pos = maze_tilemap.world_to_map(Vector2(pos_x, pos_y)*1.0/maze_tilemap.get_scale().x)
+		tile_pos = Vector2(floor(tile_pos.x), floor(tile_pos.y))
+		if maze_tilemap.get_cellv(tile_pos) == 0:
+			player.set_pos(Vector2(pos_x, pos_y))
+			print (tile_pos)
+
 func create_enemy_swarmer(energy):
 
 	var enemy_node = enemy_1.instance()
 	# position
-	var pos_x = randi()%13000#FIX
-	var pos_y = randi()%13000#FIX
+	var pos_x = randi()%(maze_size * 4 * 64) #maze:size * scale* tile_size
+	var pos_y = randi()%(maze_size * 4 * 64)
+
 	enemy_node.set_pos(Vector2(pos_x, pos_y))
 	
 	# set parameters
@@ -158,7 +189,7 @@ func generate_random_distribution(N, M, min_num = null, max_num = null):
 		out_array = []
 		
 		if tries == 99:
-			print ("not found")
+			#print ("not found")
 			min_num = null
 			max_num = null
 		

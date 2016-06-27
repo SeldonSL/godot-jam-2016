@@ -21,7 +21,11 @@ func _ready():
 	logo = get_node("myLogo")
 	logo.set_scale(logo_scale)
 	logo.set_modulate(Color(255,255,255,alpha))
+	var fullscreen = get_node("/root/configFileManager").getFullscreen()
+	print (fullscreen)
+	OS.set_window_fullscreen(fullscreen)
 	set_process(true)
+	
 
 func getSplashScreenState():
 	return state

@@ -25,11 +25,12 @@ var has_player_lock = false
 var ang = 0
 var angle_draw = 0
 
-
+var maze_size = null
 onready var sound = get_node("/root/menu_music/SamplePlayer")
 
 func _ready():
 
+	maze_size = get_node("/root/configFileManager").getMazeSize()
 	#scale
 	randomize()
 	var wh_ratio = randf()*0.4 + 0.6
@@ -49,11 +50,13 @@ func update_params():
 	update()
 	
 func _process(delta):
-	var player_pos = get_node("../../../TestLevel/Human Player").get_pos()
+
+		
+
 	
 	#check if player is close -> follow
 	if !has_player_lock:		
-		
+		var player_pos = get_node("../../../TestLevel/Human Player").get_pos()
 		var dist = get_pos().distance_to(player_pos)
 		if dist < fov: 
 			path = []
@@ -110,12 +113,14 @@ func _process(delta):
 			is_moving = false
 
 			pass
+		
+		
 
 			
 	else: # generate new path
-		
-		var x = randi() % int(12900) # FIX
-		var y = randi() % int(12900) #FIX
+		var player_pos = get_node("../../../TestLevel/Human Player").get_pos()
+		var x = randi()%(maze_size * 4 * 64) #maze:size * scale* tile_size
+		var y = randi()%(maze_size * 4 * 64)
 
 		var explorer_pos = Vector2(x,y)
 		var path_pos = current_aggressiveness * player_pos + (1-current_aggressiveness)*explorer_pos
@@ -123,7 +128,8 @@ func _process(delta):
 		path.invert()
 		is_moving = true
 
-
+	if currentLife < 0:
+		add_life(0) # destroy
 
 func add_life(lifeValue):
 	#print (currentLife)
@@ -134,8 +140,11 @@ func add_life(lifeValue):
 		get_node("Timer").start()
 		set_monitorable(false)
 		sound.play("Laser_05", true)
-	
-
+		get_node("/root/TestLevel").score += life*power
+		get_node("/root/TestLevel").enemies_killed += 1
+		var score = get_node("/root/TestLevel").score 
+		get_node("/root/TestLevel/ui/top/Score").set_text("Score: "+str(score))
+	update()
 
 
 func _on_Enemy_area_enter( area ):
@@ -146,13 +155,8 @@ func _on_Enemy_area_enter( area ):
 func _on_Enemy_body_enter( body ):
 	if (body.has_method("add_life")):
 		body.add_life(-power)
-		get_node("Particles2D").set_emitting(true)
-		set_process(false)
-		get_node("Timer").start()
-		set_monitorable(false)
-		sound.play("Laser_05", true)
-		currentLife = -1
-		update()
+		currentLife = -10
+
 
 
 func _draw():
@@ -179,8 +183,8 @@ func _draw():
 	
 	
 func _on_Timer_timeout():
-	var x = randi() % int(12900)#FIX
-	var y = randi() % int(12900)
+	var x = randi()%(maze_size * 4 * 64) #maze:size * scale* tile_size
+	var y = randi()%(maze_size * 4 * 64)
 	get_node("Particles2D").set_emitting(false)	
 	set_pos(Vector2(x,y))
 	set_process(true)

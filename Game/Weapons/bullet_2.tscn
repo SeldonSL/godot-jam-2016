@@ -10,7 +10,7 @@ extents = Vector2( 10, 10 )
 
 [node name="Bullet" type="Area2D"]
 
-transform/scale = Vector2( 1.2, 1.2 )
+transform/scale = Vector2( 1.4, 1.4 )
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1.1, 0, 0, 2, 0, 0 )
@@ -19,6 +19,8 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision/layers = 16
+collision/mask = 5
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"2D" }
 Speed = 500

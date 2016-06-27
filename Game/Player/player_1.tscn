@@ -28,7 +28,7 @@ collision/margin = 0.08
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"Script" }
 speed = 3
-life = 10
+life = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -71,5 +71,23 @@ params/anim_initial_pos = 0.0
 color/color_ramp = SubResource( 2 )
 
 [node name="Weapon" parent="." instance=ExtResource( 4 )]
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
+[node name="timer_damage" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="timer_damage" to="." method="_on_timer_damage_timeout"]
 
 

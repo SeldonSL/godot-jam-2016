@@ -37,4 +37,7 @@ func _on_Bullet_area_enter( area ):
 
 
 func _on_Bullet_body_enter( body ):
+	if (body.has_method("add_life") and !body.is_in_group("enemies")):
+		body.add_life(-Damage)
+
 	self.queue_free() 

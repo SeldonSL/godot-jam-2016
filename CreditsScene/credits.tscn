@@ -1,77 +1,211 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://CreditsScene/credits.gd" type="Script" id=1]
-[ext_resource path="res://CreditsScene/font.fnt" type="Font" id=2]
-[ext_resource path="res://CreditsScene/button2.png" type="Texture" id=3]
-
-
-
+[ext_resource path="res://CreditsScene/back_grid.png" type="Texture" id=2]
+[ext_resource path="res://CreditsScene/title.png" type="Texture" id=3]
+[ext_resource path="res://CreditsScene/button_exit1.png" type="Texture" id=4]
+[ext_resource path="res://CreditsScene/button_exit2.png" type="Texture" id=5]
+[ext_resource path="res://Font/font_32.fnt" type="Font" id=6]
+[ext_resource path="res://CreditsScene/icon.png" type="Texture" id=7]
+[ext_resource path="res://CreditsScene/Apps-Inkscape-icon.png" type="Texture" id=8]
+[ext_resource path="res://CreditsScene/gimp.png" type="Texture" id=9]
 
 [node name="Credits" type="Node"]
 
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"Script" }
 
-[node name="Title" type="Label" parent="."]
+[node name="TextureFrame" type="TextureFrame" parent="."]
 
-margin/left = 182.0
-margin/top = 37.0
-margin/right = 396.0
-margin/bottom = 73.0
+margin/right = 1281.0
+margin/bottom = 726.0
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
-custom_fonts/font = ExtResource( 2 )
-text = "Credits"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+size_flags/vertical = 2
+texture = ExtResource( 2 )
 
-[node name="Developer" type="Label" parent="."]
+[node name="title" type="TextureFrame" parent="."]
 
-margin/left = 65.0
-margin/top = 197.0
-margin/right = 523.0
-margin/bottom = 342.0
+margin/left = 385.0
+margin/top = 75.0
+margin/right = 1118.0
+margin/bottom = 147.0
+rect/scale = Vector2( 0.7, 0.7 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
-custom_fonts/font = ExtResource( 2 )
-text = "Developer: BlackQuiltro"
-align = 1
-autowrap = true
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+size_flags/vertical = 2
+texture = ExtResource( 3 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
 
-margin/left = 181.0
-margin/top = 679.0
-margin/right = 426.0
-margin/bottom = 728.0
+margin/left = 990.0
+margin/top = 610.0
+margin/right = 1190.0
+margin/bottom = 680.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 toggle_mode = false
-textures/normal = ExtResource( 3 )
-params/scale = Vector2( 5, 1 )
+textures/normal = ExtResource( 4 )
+textures/pressed = ExtResource( 5 )
+params/scale = Vector2( 0.4, 0.4 )
 
-[node name="Label" type="Label" parent="TextureButton"]
+[node name="Label" type="Label" parent="."]
 
-margin/left = 56.0
-margin/top = 5.0
-margin/right = 192.0
-margin/bottom = 41.0
+margin/left = 130.0
+margin/top = 214.0
+margin/right = 383.0
+margin/bottom = 245.0
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
-custom_fonts/font = ExtResource( 2 )
-text = "Back"
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.870588, 0.807843, 0.611765, 1 )
+text = "Developed by:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="Label1" type="Label" parent="."]
+
+margin/left = 128.0
+margin/top = 347.0
+margin/right = 381.0
+margin/bottom = 378.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.870588, 0.807843, 0.611765, 1 )
+text = "Music:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label2" type="Label" parent="."]
+
+margin/left = 130.0
+margin/top = 473.0
+margin/right = 383.0
+margin/bottom = 504.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.870588, 0.807843, 0.611765, 1 )
+text = "Sound Fx:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label3" type="Label" parent="."]
+
+margin/left = 675.0
+margin/top = 198.0
+margin/right = 1013.0
+margin/bottom = 260.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.870588, 0.807843, 0.611765, 1 )
+text = "BlackQuiltro\nwww.blackquiltro.cl"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label4" type="Label" parent="."]
+
+margin/left = 459.0
+margin/top = 330.0
+margin/right = 1225.0
+margin/bottom = 392.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.870588, 0.807843, 0.611765, 1 )
+text = "Alexandr Zhelanov, \nhttps://soundcloud.com/alexandr-zhelanov"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label5" type="Label" parent="."]
+
+margin/left = 559.0
+margin/top = 454.0
+margin/right = 1142.0
+margin/bottom = 516.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.870588, 0.807843, 0.611765, 1 )
+text = "Little Robot Sound Factory\nwww.littlerobotsoundfactory.com"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label6" type="Label" parent="."]
+
+margin/left = 130.0
+margin/top = 603.0
+margin/right = 383.0
+margin/bottom = 634.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.870588, 0.807843, 0.611765, 1 )
+text = "Made with:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="godot" type="TextureFrame" parent="."]
+
+margin/left = 557.0
+margin/top = 569.0
+margin/right = 621.0
+margin/bottom = 633.0
+rect/scale = Vector2( 1.5, 1.5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+texture = ExtResource( 7 )
+
+[node name="inkscape" type="TextureFrame" parent="."]
+
+margin/left = 390.0
+margin/top = 572.0
+margin/right = 902.0
+margin/bottom = 1084.0
+rect/scale = Vector2( 0.2, 0.2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+texture = ExtResource( 8 )
+
+[node name="gimp" type="TextureFrame" parent="."]
+
+margin/left = 714.0
+margin/top = 568.0
+margin/right = 1226.0
+margin/bottom = 1080.0
+rect/scale = Vector2( 0.2, 0.2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+texture = ExtResource( 9 )
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
 
