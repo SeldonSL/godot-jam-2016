@@ -228,7 +228,7 @@ func add_mission():
 	else:
 		mission = load("res://Game/Objectives/player_nexus.tscn")
 		
-	mission_inst = mission.instance()
+	var mission_inst = mission.instance()
 	add_child(mission_inst)
 
 func _notification(what):
