@@ -24,6 +24,8 @@ var shield_damage = 0
 
 # Keyboard Movement actions
 var move_actions = { "K_MOVE_LEFT":Vector2(-1,0), "K_MOVE_RIGHT":Vector2(1,0), "K_MOVE_UP":Vector2(0,-1), "K_MOVE_DOWN":Vector2(0,1) }
+# Gamepad parameters
+var DEADZONE = 0.1
 
 var path = []
 var maze_size = null
@@ -59,6 +61,14 @@ func _process(delta):
 	else:
 		dir = Vector2(0,0)
 	
+	var axis_value_x = Input.get_joy_axis(1, 0)
+	var axis_value_y = Input.get_joy_axis(1, 1)
+	#print (str(axis_value_x) + " "+str(axis_value_y))
+	if abs(axis_value_x) < DEADZONE:
+		axis_value_x = 0
+	if abs(axis_value_y) < DEADZONE:
+		axis_value_y = 0
+	dir = Vector2(axis_value_x, axis_value_y)
 	
 	
 	for ac in move_actions:
@@ -92,6 +102,27 @@ func _process(delta):
 		
 		
 		get_node("Weapon").fire_weapon(shootAngle)
+		
+	else:
+		isShooting = false
+	
+	var shoot_value_x = Input.get_joy_axis(1, 2)
+	var shoot_value_y = Input.get_joy_axis(1, 3)
+	print (str(shoot_value_x) + " "+str(shoot_value_y))
+	if abs(shoot_value_x) < DEADZONE:
+		shoot_value_x = 0
+	if abs(shoot_value_y) < DEADZONE:
+		shoot_value_y = 0
+	
+	if abs(shoot_value_x) > 0 or abs(shoot_value_y) > 0:
+		isShooting = true
+		shootAngle = Vector2(shoot_value_x, shoot_value_y)
+		last_angle = shootAngle
+		var rot = Vector2(0,0).angle_to_point(last_angle)-3.14159
+		#print (rot + 3.14159)
+		set_rot(rot )
+		get_node("Weapon").fire_weapon(-rot - 3*3.14159/2)	
+		
 		
 	else:
 		isShooting = false
