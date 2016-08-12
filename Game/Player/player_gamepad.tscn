@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://Game/Player/player_gamepad.gd" type="Script" id=1]
+[ext_resource path="res://Game/Player/nave.png" type="Texture" id=2]
+[ext_resource path="res://Game/Player/thrust_particle.png" type="Texture" id=3]
+[ext_resource path="res://Game/Weapons/weapon_1.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 200, 150 )
+
+[sub_resource type="ColorRamp" id=2]
+
+offsets = FloatArray( 0, 0.666667 )
+colors = ColorArray( 0.870588, 0.807843, 0.611765, 1, 0.180392, 0.47451, 0.729412, 1 )
+
+[node name="Human Player" type="KinematicBody2D"]
+
+transform/scale = Vector2( 0.21, 0.2 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -50 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
+speed = 3
+life = 200
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0, -50 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/rot = 270.0
+texture = ExtResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+transform/pos = Vector2( 0, -65 )
+config/amount = 64
+config/lifetime = 2.0
+config/preprocess = 0.2
+config/emitting = false
+config/local_space = false
+config/explosiveness = 0.2
+config/texture = ExtResource( 3 )
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 100.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 10.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 2.0
+params/final_size = 3.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color_ramp = SubResource( 2 )
+
+[node name="Weapon" parent="." instance=ExtResource( 4 )]
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
+[node name="timer_damage" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="timer_damage" to="." method="_on_timer_damage_timeout"]
+
+
