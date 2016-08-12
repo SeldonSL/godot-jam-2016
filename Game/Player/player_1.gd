@@ -29,6 +29,10 @@ var path = []
 var maze_size = null
 var maze_tilemap = null
 
+var dir = Vector2(0,0)
+var dir_slide = Vector2(0,0)
+
+
 
 func _ready():
 	set_process(true)
@@ -45,7 +49,17 @@ func _process(delta):
 		print ("DEAD: Game Over")
 		
 	# Movement
-	var dir = Vector2(0,0)
+	#dir = Vector2(0,0)
+	#make character slide nicely through the world	
+	var slides_attemps = 5
+	if(is_colliding() and slides_attemps > 0):
+		dir = get_collision_normal().slide(dir)
+		dir = move(dir.normalized()*speed*delta*0.5)
+		slides_attemps -= 1
+	else:
+		dir = Vector2(0,0)
+	
+	
 	
 	for ac in move_actions:
 		if Input.is_action_pressed(ac):
@@ -53,10 +67,19 @@ func _process(delta):
 			
 	move(dir.normalized() * speed * delta)
 	if dir == Vector2(0,0):
-		look_at(last_angle)
+		#look_at(last_angle)
+
+		var rot = Vector2(0,0).angle_to_point(last_angle)-3.14159
+		set_rot(rot )
+	#elif is_colliding():
+	#	var rot = Vector2(0,0).angle_to_point(last_angle)-3.14159 
+	#	set_rot( rot )
 	else:
-		
-		set_rot(Vector2(0,0).angle_to_point(dir)-3.14159 )
+		last_angle = dir
+		var rot = Vector2(0,0).angle_to_point(last_angle)-3.14159
+		set_rot(rot )
+	
+
 	
 	# Shooting
 	if Input.is_action_pressed("M_SHOOT"):

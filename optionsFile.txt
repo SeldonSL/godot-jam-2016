@@ -6,6 +6,6 @@ MazeSize=50
 
 [General]
 
-Fullscreen=true
+Fullscreen=false
 Music=true
 SoundFx=true
